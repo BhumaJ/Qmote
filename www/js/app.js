@@ -87,7 +87,7 @@ var app= angular.module('starter', ['ionic', 'starter.controllers'])
                 views: {
                     'menuContent': {
                         templateUrl: 'views/discover.html',
-                        controller: 'Discover'
+                        controller: 'discover'
                     }
                 }
             })

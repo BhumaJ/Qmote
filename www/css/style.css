@@ -1,1 +1,10 @@
 /* Empty. Add your own CSS if you like */
+
+.bar-custom-color {
+    background-color: #51A999 !important;
+    color: #fff !important;
+}
+
+.button-black {
+    color: #000 !important;
+}

@@ -1,0 +1,16 @@
+<ion-view view-title="Discover Media Center">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-refresh" ng-click="scanAuto()"></button>
+    </ion-nav-buttons>
+
+    <ion-content>
+        <div class="list" >
+            <a ng-repeat="user in users"
+               class="item item-thumbnail-left">
+                <img src="img/ionic.png">
+                <h2>{{user.name}}</h2>
+                <h4>{{user.addresses[0]}} : {{user.port}} </h4>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,5 +1,49 @@
-<ion-view view-title="Remote">
-    <ion-content>
-        <h1>Remote</h1>
+<ion-view view-title="Remote" class="button-black">
+
+    <ion-content class="padding" scroll=false>
+        <div class="remote-btn">
+            <div class="row">
+                <div class="col">
+                    <button class="btn-custom button button-icon"
+                            ng-class="{'ion-volume-mute':muted,'ion-volume-medium':!muted}"
+                            ng-click="requestMute()"></button>
+                </div>
+                <div class="col center-col">
+                    <button class="btn-custom button button-icon ion-chevron-up" ng-click="request('up')"></button>
+                </div>
+                <div class="col">
+                    <button class="btn-custom button button-icon ion-power" ng-click="request('shutdown')"></button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button class="btn-custom button-nav-left button button-icon ion-chevron-left"
+                            ng-click="request('left')"></button>
+                </div>
+
+                <div class="col center-col col-25">
+                    <button class="btn-custom button button-icon ion-checkmark-circled"
+                            ng-click="request('select')"></button>
+                </div>
+
+                <div class="col">
+                    <button class="btn-custom button-nav-right button button-icon ion-chevron-right"
+                            ng-click="request('right')"></button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button class="btn-custom button button-icon ion-arrow-left-c" ng-click="request('back')"></button>
+                </div>
+                <div class="col center-col">
+                    <button class="btn-custom button button-icon ion-chevron-down" ng-click="request('down')"></button>
+                </div>
+                <div class="col">
+                    <button class="btn-custom button button-icon ion-android-home" ng-click="request('home')"></button>
+                </div>
+            </div>
+        </div>
     </ion-content>
 </ion-view>

@@ -36,7 +36,8 @@ var app= angular.module('starter', ['ionic', 'starter.controllers'])
                 url: '/remote',
                 views: {
                     'menuContent': {
-                        templateUrl: 'views/remote.html'
+                        templateUrl: 'views/remote.html',
+                        controller: 'RemoteCtrl'
                     }
                 }
             })
@@ -45,7 +46,8 @@ var app= angular.module('starter', ['ionic', 'starter.controllers'])
                 url: '/movies',
                 views: {
                     'menuContent': {
-                        templateUrl: 'views/Movies/movies.html'
+                        templateUrl: 'views/Movies/movies.html',
+                        controller : 'MovieCtrl'
                     }
                 }
             })

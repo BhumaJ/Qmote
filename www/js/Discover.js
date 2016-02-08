@@ -1,7 +1,7 @@
 /**
  * Created by Bhuma on 04-Feb-16.
  */
-app.controller('discover', function ($scope, $http , $state) {
+app.controller('discover', function ($scope, $http , $state , $ionicHistory) {
 
 
     $scope.scanAuto = function () {
@@ -26,9 +26,9 @@ app.controller('discover', function ($scope, $http , $state) {
 
     $scope.doLogin = function (user) {
 
-        console.log(user.name)
+       /* console.log(user.name)
         console.log(user.addresses[0])
-        console.log(user.port)
+        console.log(user.port)*/
         var ip = user.addresses[0];
         var port = user.port;
 
@@ -38,7 +38,9 @@ app.controller('discover', function ($scope, $http , $state) {
             .success(function (data, status) {
                 connected = true;
                 errCon = false;
-                alert("success")
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
                 $state.go('app.remote');
             })
             .error(function (data, status) {

@@ -1,5 +1,32 @@
-<ion-view view-title="Movies">
+<ion-view view-title="Movies" ng-init="showMovies()">
+    <!--<ion-nav-buttons side="right">
+        <button class="button button-icon button-white ion-android-search" ng-click="searchBox()"></button>
+    </ion-nav-buttons>-->
+
     <ion-content>
-        <h1>Movies</h1>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="showMovies()">
+        </ion-refresher>
+      <!--  <div class="list list-inset search-box" ng-show="showSearch">
+            <label class="item item-input search-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model="search">
+            </label>
+        </div>-->
+
+        <ion-list>
+            <a class="item item-icon-right item-thumbnail-left" collection-repeat="movie in movies" href="#app/movies/{{movie.label}}">
+                <img ng-src="{{getThumbnail(movie.thumbnail)}}" class="movie-list-thumb">
+                <h2>{{movie.label}}</h2>
+                <p>
+					<span>
+						{{ movie.genre.join(',') }}
+					</span>
+                </p>
+                <p class="padding-top">
+                    {{toHours(movie.runtime)}} | {{movie.year}}
+                </p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
+        </ion-list>
     </ion-content>
 </ion-view>

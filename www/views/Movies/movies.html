@@ -14,7 +14,7 @@
         </div>-->
 
         <ion-list>
-            <a class="item item-icon-right item-thumbnail-left" collection-repeat="movie in movies" href="#app/movies/{{movie.label}}">
+            <a class="item item-icon-right item-thumbnail-left" collection-repeat="movie in movies" href="#/app/movies/{{movie.label}}">
                 <img ng-src="{{getThumbnail(movie.thumbnail)}}" class="movie-list-thumb">
                 <h2>{{movie.label}}</h2>
                 <p>

@@ -1,10 +1,10 @@
-<ion-view view-title="TV Shows" ng-init="showSeries()" cache-view="true">
+<ion-view view-title="Season{{season_id}}" ng-init="showEpisodes(series_id, season_id)" cache-view="true">
     <ion-nav-buttons side="right">
         <button class="button button-icon ion-android-search" ng-click="searchBox()"></button>
     </ion-nav-buttons>
 
     <ion-content>
-        <ion-refresher pulling-text="Pull to refresh..." on-refresh="showSeries()">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="showEpisodes(series_id, season_id)">
         </ion-refresher>
         <div class="list list-inset search-box" ng-show="showSearch">
             <label class="item item-input search-input">
@@ -14,11 +14,8 @@
         </div>
 
         <ion-list>
-            <a class="tvshow-item item item-thumbnail-left item-icon-right" collection-repeat="tvshow in tvshows | filter:search" href="#/app/tvshows-detail/{{tvshow.label}}/{{tvshow.tvshowid}}">
-                <img class="tvshow-thumb" ng-src="{{getThumbnailSeries(tvshow.thumbnail)}}">
-                <h2>{{tvshow.label}}</h2>
-                <p>{{tvshow.year}}</p>
-                <p>Rating : {{Math.round(tvshow.rating * 10) / 10}}/10</p>
+            <a class="item item-icon-right" collection-repeat="episode in episodes | filter:search" href="#/app/tvshow-episode-detail/{{episode.title}}/{{episode.episodeid}}">
+                <h2>{{episode.episode}} &nbsp; <b>{{episode.title}}</b></h2>
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </a>
         </ion-list>

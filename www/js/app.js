@@ -65,10 +65,40 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 url: '/tvshows',
                 views: {
                     'menuContent': {
-                        templateUrl: 'views/TVshows/tvshows.html'
+                        templateUrl: 'views/TVshows/tvshows.html',
+                        controller: 'TVShowsCtrl'
                     }
                 }
             })
+            .state('app.tvshows-detail', {
+                url: '/tvshows-detail/:seriesLabel/:seriesId',
+                views: {
+                    'menuContent' : {
+                        templateUrl : "views/TVshows/tvshowsdetail.html",
+                        controller: 'TVShowsCtrl'
+                    }
+                }
+            })
+            .state('app.tvshows-season-detail', {
+                url: '/tvshows-season-detail/:seriesId/:seasonId',
+                views: {
+                    'menuContent' : {
+                        templateUrl : "views/TVshows/season-detail.html",
+                        controller: 'TVShowsCtrl'
+                    }
+                }
+            })
+
+            .state('app.tvshow-episode-detail', {
+                url: '/tvshow-episode-detail/:episodeLabel/:episodeId',
+                views: {
+                    'menuContent' : {
+                        templateUrl : "views/TVshows/episode-detail.html",
+                        controller: 'TVShowsCtrl'
+                    }
+                }
+            })
+
             .state('app.music', {
                 url: '/music',
                 views: {
@@ -100,6 +130,15 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                     'menuContent': {
                         templateUrl: 'views/discover.html',
                         controller: 'discover'
+                    }
+                }
+            })
+
+            .state('app.music', {
+                url: '/music',
+                views : {
+                    'tab-artist': {
+
                     }
                 }
             })

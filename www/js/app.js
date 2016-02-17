@@ -73,8 +73,8 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
             .state('app.tvshows-detail', {
                 url: '/tvshows-detail/:seriesLabel/:seriesId',
                 views: {
-                    'menuContent' : {
-                        templateUrl : "views/TVshows/tvshowsdetail.html",
+                    'menuContent': {
+                        templateUrl: "views/TVshows/tvshowsdetail.html",
                         controller: 'TVShowsCtrl'
                     }
                 }
@@ -82,8 +82,8 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
             .state('app.tvshows-season-detail', {
                 url: '/tvshows-season-detail/:seriesId/:seasonId',
                 views: {
-                    'menuContent' : {
-                        templateUrl : "views/TVshows/season-detail.html",
+                    'menuContent': {
+                        templateUrl: "views/TVshows/season-detail.html",
                         controller: 'TVShowsCtrl'
                     }
                 }
@@ -92,8 +92,8 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
             .state('app.tvshow-episode-detail', {
                 url: '/tvshow-episode-detail/:episodeLabel/:episodeId',
                 views: {
-                    'menuContent' : {
-                        templateUrl : "views/TVshows/episode-detail.html",
+                    'menuContent': {
+                        templateUrl: "views/TVshows/episode-detail.html",
                         controller: 'TVShowsCtrl'
                     }
                 }
@@ -134,15 +134,35 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
-            .state('app.music', {
-                url: '/music',
-                views : {
+            .state('app.music-artist', {
+                url: '/music/artist',
+                views: {
                     'tab-artist': {
-
+                        templateUrl: 'views/music-artist.html',
+                        controller: 'MusicCtrl'
                     }
                 }
             })
 
+            .state('app.music-album', {
+                url: '/music/album',
+                views: {
+                    'tab-album': {
+                        templateUrl: 'views/music-album.html',
+                        controller: 'MusicCtrl'
+                    }
+                }
+            })
+
+            .state('app.music-genre', {
+                url : '/music/genre',
+                views : {
+                    'tab-genre' : {
+                        templateUrl : 'views/music-genre.html',
+                        controller : 'MusicCtrl'
+                    }
+                }
+            })
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/remote');
     });

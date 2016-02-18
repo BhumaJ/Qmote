@@ -1,10 +1,10 @@
-<ion-view view-title="Album" ng-init="showAlbums()" >
+<ion-view view-title="{{album_label}}" ng-init="showSongs(album_id)" cache-view="true">
     <ion-nav-buttons side="right">
         <button class="button button-icon button-white ion-android-search" ng-click="searchBox()"></button>
     </ion-nav-buttons>
 
     <ion-content>
-        <ion-refresher pulling-text="Pull to refresh..." on-refresh="showAlbums()">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="showSongs(album_id)">
         </ion-refresher>
         <div class="list list-inset search-box" ng-show="showSearch">
             <label class="item item-input search-input">
@@ -14,11 +14,9 @@
         </div>
 
         <ion-list>
-            <a class="item item-thumbnail-left item-icon-right" collection-repeat="album in albums | filter:search" href="#app/music/song/{{album.label}}/{{album.albumid}}">
-                <img ng-src="{{getThumbnailAlbum(album.thumbnail)}}">
-                <h2>{{album.label}}</h2>
-                <p>{{album.year}}</p>
-                <p ng-repeat="genre in album.genre">{{genre}}{{$last ? '' : ', '}}</p>
+            <a class="item item-icon-right" style="color: black" collection-repeat="song in songs | filter:search" href="#/tab/track-detail/{{song.songid}}/{{song.label}}">
+                {{song.track}}&nbsp;&nbsp;&nbsp; <b>{{song.label}}</b>
+                <span class="item-note">{{toMinutes(song.duration)}}</span>
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </a>
         </ion-list>

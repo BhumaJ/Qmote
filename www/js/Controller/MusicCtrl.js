@@ -21,8 +21,9 @@ app.controller('MusicCtrl', function ($scope, $http, $stateParams, $location, $i
     };
 
     // Get albums of selected artist based on id
-    $scope.showAlbums = function (artistid) {
-        Loader.getAlbums(artistid, function (data) {
+    $scope.showAlbums = function () {
+        console.log("showAlbum*******************************")
+        Loader.getAlbums(function (data) {
             $scope.albums = data.result.albums;
             $scope.$broadcast('scroll.refreshComplete');
         });
@@ -114,7 +115,7 @@ app.controller('MusicCtrl', function ($scope, $http, $stateParams, $location, $i
                     type: "audio/mpeg"
                 }
             ],
-            theme: "lib/videogular-themes-default/videogular.min.css",
+            theme: "lib/videogular-themes-default/videogular.min.css"
         };
 
         return $scope.config;

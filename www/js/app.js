@@ -23,6 +23,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
     .config(function ($stateProvider, $urlRouterProvider) {
+
         $stateProvider
 
             .state('app', {
@@ -99,15 +100,6 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
-            .state('app.music', {
-                url: '/music',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'views/Music/music.html',
-                        controller: 'MusicCtrl'
-                    }
-                }
-            })
             .state('app.setting', {
                 url: '/setting',
                 views: {
@@ -134,11 +126,19 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
+            .state('app.music', {
+                url: '/music',
+                views: {
+                    'menuContent': {
+                        templateUrl : "views/Music/music.html"
+                    }
+                }
+            })
             .state('app.music-artist', {
                 url: '/music/artist',
                 views: {
                     'tab-artist': {
-                        templateUrl: 'views/music-artist.html',
+                        templateUrl: 'views/Music/music-artist.html',
                         controller: 'MusicCtrl'
                     }
                 }
@@ -148,18 +148,26 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 url: '/music/album',
                 views: {
                     'tab-album': {
-                        templateUrl: 'views/music-album.html',
+                        templateUrl: 'views/Music/music-album.html',
                         controller: 'MusicCtrl'
                     }
                 }
             })
-
+            .state('app.music-song', {
+                url: '/music/song/:albumLabel/:albumId',
+                views: {
+                    'tab-song': {
+                        templateUrl: 'views/Music/music-song.html',
+                        controller: 'MusicCtrl'
+                    }
+                }
+            })
             .state('app.music-genre', {
-                url : '/music/genre',
-                views : {
-                    'tab-genre' : {
-                        templateUrl : 'views/music-genre.html',
-                        controller : 'MusicCtrl'
+                url: '/music/genre',
+                views: {
+                    'tab-genre': {
+                        templateUrl: 'views/Music/music-genre.html',
+                        controller: 'MusicCtrl'
                     }
                 }
             })

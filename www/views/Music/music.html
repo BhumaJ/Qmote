@@ -1,23 +1,19 @@
-<ion-view view-title="Music">
-    <ion-pane>
-        <ion-tabs class="tabs-icon-top bar-custom-color">
-            <!-- Artist Tab -->
-            <ion-tab title="Artist" icon-off="ion-speakerphone" icon-on="ion-speakerphone"
-                     href="#/app/music/artist">
-                <ion-nav-view name="tab-artist"></ion-nav-view>
-            </ion-tab>
+<ion-tabs class="tabs-icon-top bar-custom-color">
+    <!-- Artist Tab -->
+    <ion-tab title="Artist" icon-off="ion-speakerphone" icon-on="ion-speakerphone"
+             href="#/app/music/artist">
+        <ion-nav-view name="tab-artist"></ion-nav-view>
+    </ion-tab>
 
-            <!-- Album Tab -->
-            <ion-tab title="Album" icon-off="ion-ios-musical-note" icon-on="ion-ios-musical-note"
-                     href="#/app/music/album">
-                <ion-nav-view name="menuContent"></ion-nav-view>
-            </ion-tab>
+    <!-- Album Tab -->
+    <ion-tab title="Album" icon-off="ion-ios-musical-note" icon-on="ion-ios-musical-note"
+             href="#/app/music/album">
+        <ion-nav-view name="tab-album"></ion-nav-view>
+    </ion-tab>
 
-            <!-- Genre Tab -->
-            <ion-tab title="Genre" icon-off="ion-clipboard" icon-on="ion-clipboard" href="#/app/music/genre">
-                <ion-nav-view name="tab-genre"></ion-nav-view>
-            </ion-tab>
+    <!-- Genre Tab -->
+    <ion-tab title="Genre" icon-off="ion-clipboard" icon-on="ion-clipboard" href="#/app/music/genre">
+        <ion-nav-view name="tab-genre"></ion-nav-view>
+    </ion-tab>
 
-        </ion-tabs>
-    </ion-pane>
-</ion-view>
+</ion-tabs>

@@ -134,8 +134,8 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                     }
                 }
             })
-            .state('app.music-artist', {
-                url: '/music/artist',
+            .state('app.music.music-artist', {
+                url: '/artist',
                 views: {
                     'tab-artist': {
                         templateUrl: 'views/Music/music-artist.html',
@@ -144,8 +144,8 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
-            .state('app.music-album', {
-                url: '/music/album',
+            .state('app.music.music-artist-album', {
+                url: '/album/:artistLabel/:artistId',
                 views: {
                     'tab-album': {
                         templateUrl: 'views/Music/music-album.html',
@@ -153,17 +153,28 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                     }
                 }
             })
-            .state('app.music-song', {
-                url: '/music/song/:albumLabel/:albumId',
+
+            .state('app.music.music-album', {
+                url: '/album',
                 views: {
-                    'tab-song': {
+                    'tab-album': {
+                        templateUrl: 'views/Music/music-album.html',
+                        controller: 'MusicCtrl'
+                    }
+                }
+            })
+
+            .state('app.music.music-song', {
+                url: '/song/:albumLabel/:albumId',
+                views: {
+                    'tab-album': {
                         templateUrl: 'views/Music/music-song.html',
                         controller: 'MusicCtrl'
                     }
                 }
             })
-            .state('app.music-genre', {
-                url: '/music/genre',
+            .state('app.music.music-genre', {
+                url: '/genre',
                 views: {
                     'tab-genre': {
                         templateUrl: 'views/Music/music-genre.html',

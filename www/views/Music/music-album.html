@@ -1,4 +1,4 @@
-<ion-view view-title="Album" ng-init="showAlbums()" >
+<ion-view view-title="Album" ng-init="showAlbums(artist_id , genre_id)" >
     <ion-nav-buttons side="right">
         <button class="button button-icon button-white ion-android-search" ng-click="searchBox()"></button>
     </ion-nav-buttons>
@@ -14,7 +14,7 @@
         </div>
 
         <ion-list>
-            <a class="item item-thumbnail-left item-icon-right" collection-repeat="album in albums | filter:search" href="#app/music/song/{{album.label}}/{{album.albumid}}">
+            <a class="item item-thumbnail-left item-icon-right" collection-repeat="album in albums | filter:search" href="#/app/music/song/{{album.label}}/{{album.albumid}}">
                 <img ng-src="{{getThumbnailAlbum(album.thumbnail)}}">
                 <h2>{{album.label}}</h2>
                 <p>{{album.year}}</p>

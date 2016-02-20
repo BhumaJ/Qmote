@@ -1,4 +1,4 @@
-app.controller('MusicCtrl', function ($scope, $http, $stateParams, $location, $ionicLoading, $sce, Loader) {
+app.controller('MusicCtrl', function ($scope, $http, $stateParams, $state, $location, $ionicLoading, $sce, Loader) {
 
     // Get artist, album and song labels and ids to display
     // on each view and filter to get the correct albums and
@@ -21,9 +21,8 @@ app.controller('MusicCtrl', function ($scope, $http, $stateParams, $location, $i
     };
 
     // Get albums of selected artist based on id
-    $scope.showAlbums = function () {
-        console.log("showAlbum*******************************")
-        Loader.getAlbums(function (data) {
+    $scope.showAlbums = function (artist_id , genre_id) {
+        Loader.getAlbums(artist_id, genre_id ,function (data) {
             $scope.albums = data.result.albums;
             $scope.$broadcast('scroll.refreshComplete');
         });
@@ -45,6 +44,13 @@ app.controller('MusicCtrl', function ($scope, $http, $stateParams, $location, $i
             $scope.getStreamInfoMusic($scope.songdetails.file);
         });
     };
+    $scope.showGenre = function () {
+        console.log("Genre************");
+        Loader.getGenre(function (data) {
+            $scope.genres = data.result.genres;
+            $scope.$broadcast('scroll.refreshComplete');
+        })
+    }
 
     $scope.clearPlaylist = function (album_id) {
 
@@ -84,7 +90,7 @@ app.controller('MusicCtrl', function ($scope, $http, $stateParams, $location, $i
         $scope.clearPlaylist(album_id);
     };
 
-    $scope.playerOpen = function(){
+    $scope.playerOpen = function () {
 
         method = "Player.Open";
         params = '{"item":{"playlistid":0}}';
@@ -95,6 +101,7 @@ app.controller('MusicCtrl', function ($scope, $http, $stateParams, $location, $i
         console.log(complete_url);
         $http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
             .success(function (data, status, headers, config) {
+                $state.go('app.remote');
             })
             .error(function (data, status, headers, config) {
                 alert("Cannot play this track");

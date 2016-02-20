@@ -14,7 +14,7 @@
         </div>
 
         <ion-list>
-            <a class="item item-icon-right" style="color: black" collection-repeat="song in songs | filter:search" href="#/tab/track-detail/{{song.songid}}/{{song.label}}">
+            <a class="item item-icon-right" style="color: black" collection-repeat="song in songs | filter:search" ng-click="playSong(album_id)">
                 {{song.track}}&nbsp;&nbsp;&nbsp; <b>{{song.label}}</b>
                 <span class="item-note">{{toMinutes(song.duration)}}</span>
                 <i class="icon ion-chevron-right icon-accessory"></i>

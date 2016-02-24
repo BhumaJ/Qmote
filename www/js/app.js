@@ -130,10 +130,20 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 url: '/music',
                 views: {
                     'menuContent': {
-                        templateUrl : "views/Music/music.html"
+                        templateUrl: "views/Music/music.html"
                     }
                 }
             })
+
+            .state('app.file', {
+                url: "/file",
+                views: {
+                    'menuContent': {
+                        templateUrl: 'views/Files/files.html'
+                    }
+                }
+            })
+
             .state('app.music.music-artist', {
                 url: '/artist',
                 views: {
@@ -145,7 +155,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
             })
 
             .state('app.music.music-artist-album', {
-                url: '/album/:artistLabel/:artistId',
+                url: '/album/:Label/:passId/:uId',
                 views: {
                     'tab-album': {
                         templateUrl: 'views/Music/music-album.html',
@@ -179,6 +189,31 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                     'tab-genre': {
                         templateUrl: 'views/Music/music-genre.html',
                         controller: 'MusicCtrl'
+                    }
+                }
+            })
+
+            .state('app.file.file-music', {
+                url: '/musicc',
+                views: {
+                    'file-tab-music': {
+                        templateUrl: 'views/Files/files-music.html'
+                    }
+                }
+            })
+            .state('app.file.file-video', {
+                url: '/video',
+                views: {
+                    'file-tab-video': {
+                        templateUrl: 'views/Files/files-video.html'
+                    }
+                }
+            })
+            .state('app.file.file-picture', {
+                url: '/picture',
+                views: {
+                    'file-tab-picture': {
+                        templateUrl: 'views/Files/files-picture.html'
                     }
                 }
             })

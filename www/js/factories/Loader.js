@@ -159,25 +159,19 @@ app.factory('Loader', function ($http, $ionicLoading) {
     };
 
 
-    loader.getAlbums = function (artistid, genreid, callback) {
+    loader.getAlbums = function (passID, uID, callback) {
         method = "AudioLibrary.GetAlbums";
-        if (artistid === undefined && genreid === undefined) {
-            console.log("****")
-            console.log(artistid, genreid)
+        console.log("passId: " + passID)
+        console.log("uID: " + uID);
+        if (uID == 1) {
+            params = '{"limits":{"start":0,"end":9999},"properties":["playcount","artist","genre","rating","thumbnail","year","mood","style"],"sort":{"order":"ascending","method":"album","ignorearticle":true},"filter":{"artistid":' + passID + '}},"id":"libAlbums"}';
+        }
+        else if (uID == 2) {
+            params = '{"limits":{"start":0,"end":9999},"properties":["playcount","artist","genre","rating","thumbnail","year","mood","style"],"sort":{"order":"ascending","method":"album","ignorearticle":true},"filter":{"genreid":' + passID + '}},"id":"libAlbums"}';
+        } else {
             params = '{"limits":{"start":0,"end":9999},"properties":["playcount","artist","genre","rating","thumbnail","year","mood","style"],"sort":{"order":"ascending","method":"album","ignorearticle":true}},"id":"libAlbums"}';
         }
-        else {
-            if (artistid === undefined) {
-                console.log("#######")
-                console.log(artistid, genreid)
-                params = '{"limits":{"start":0,"end":9999},"properties":["playcount","artist","genre","rating","thumbnail","year","mood","style"],"sort":{"order":"ascending","method":"album","ignorearticle":true},"filter":{"genreid":' + genreid + '}},"id":"libAlbums"}';
-            }
-            else {
-                console.log("&&&&&&&&")
-                console.log(artistid, genreid)
-                params = '{"limits":{"start":0,"end":9999},"properties":["playcount","artist","genre","rating","thumbnail","year","mood","style"],"sort":{"order":"ascending","method":"album","ignorearticle":true},"filter":{"artistid":' + artistid + '}},"id":"libAlbums"}';
-            }
-        }
+
         param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
         complete_url = window.base_url + param_url;
         console.log(complete_url)

@@ -12,6 +12,10 @@ app.controller('MusicCtrl', function ($scope, $http, $stateParams, $state, $loca
     $scope.song_label = $stateParams.songLabel;
     $scope.song_id = $stateParams.songId;
 
+    //Id for fetching album based on selection of genre,artist
+    $scope.pass_id = $stateParams.passId;
+    $scope.u_id = $stateParams.uId;
+
     // Get artists to display in list
     $scope.showArtists = function () {
         Loader.getArtists(function (data) {
@@ -21,8 +25,8 @@ app.controller('MusicCtrl', function ($scope, $http, $stateParams, $state, $loca
     };
 
     // Get albums of selected artist based on id
-    $scope.showAlbums = function (artist_id , genre_id) {
-        Loader.getAlbums(artist_id, genre_id ,function (data) {
+    $scope.showAlbums = function (passid, uid) {
+        Loader.getAlbums(passid, uid, function (data) {
             $scope.albums = data.result.albums;
             $scope.$broadcast('scroll.refreshComplete');
         });

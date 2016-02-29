@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic', 'starter.controllers'])
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, $rootScope) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -20,6 +20,27 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 StatusBar.styleDefault();
             }
         });
+
+        $rootScope.$on('$stateChangeSuccess ',
+            function(event, toState, toParams, fromState, fromParams){
+                console.log("Success--------------")
+                console.log(JSON.stringify(fromState))
+                console.log(JSON.stringify(toState));
+                console.log(JSON.stringify(fromParams))
+                console.log(JSON.stringify(toParams))
+
+            });
+
+        $rootScope.$on('$stateChangeError',
+            function(event, toState, toParams, fromState, fromParams, error){
+                event.preventDefault()
+                console.log("Error----------------")
+                console.log(JSON.stringify(fromState))
+                console.log(JSON.stringify(toState));
+                console.log(JSON.stringify(fromParams))
+                console.log(JSON.stringify(toParams))
+                console.log(JSON.stringify(error))
+            })
     })
 
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -135,14 +156,6 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
-            .state('app.file', {
-                url: "/file",
-                views: {
-                    'menuContent': {
-                        templateUrl: 'views/Files/files.html'
-                    }
-                }
-            })
 
             .state('app.music.music-artist', {
                 url: '/artist',
@@ -193,11 +206,20 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 }
             })
 
+            .state('app.file', {
+                url: "/file",
+                views: {
+                    'menuContent': {
+                        templateUrl: 'views/Files/files.html'
+                    }
+                }
+            })
             .state('app.file.file-music', {
-                url: '/musicc',
+                url: '/file-music',
                 views: {
                     'file-tab-music': {
-                        templateUrl: 'views/Files/files-music.html'
+                        templateUrl: 'views/Files/files-music.html',
+                        controller : "FilesCtrl"
                     }
                 }
             })
@@ -206,6 +228,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 views: {
                     'file-tab-video': {
                         templateUrl: 'views/Files/files-video.html'
+                        controller : "FilesCtrl"
                     }
                 }
             })
@@ -213,7 +236,8 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 url: '/picture',
                 views: {
                     'file-tab-picture': {
-                        templateUrl: 'views/Files/files-picture.html'
+                        templateUrl: 'views/Files/files-picture.html',
+                        controller : "FilesCtrl"
                     }
                 }
             })

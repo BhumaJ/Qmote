@@ -1,6 +1,24 @@
-<ion-view view-title="File-Music" >
+<ion-view view-title="Files-Music" ng-init="showFileType(0)">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-white ion-android-search" ng-click="searchBox()"></button>
+    </ion-nav-buttons>
 
     <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="showFileType(0)">
+        </ion-refresher>
+        <div class="list list-inset search-box" ng-show="showSearch">
+            <label class="item item-input search-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model="search">
+            </label>
+        </div>
 
+        <ion-list>
+            <a class="item item-thumbnail-left item-icon-right" collection-repeat="source in sources | filter:search">
+                <!--<img ng-src="{{getThumbnailAlbum(artist.thumbnail)}}">-->
+                <h2>{{source.label}}</h2>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
+        </ion-list>
     </ion-content>
 </ion-view>

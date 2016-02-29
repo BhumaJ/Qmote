@@ -247,5 +247,31 @@ app.factory('Loader', function ($http, $ionicLoading) {
             });
     };
 
+    loader.getAllFiles = function (id, callback) {
+        method = "Files.GetSources";
+        if(id== 0){
+            params = '{"media":"music"}';
+        }else if (id ==1) {
+            params = '{"media":"video"}';
+        }else {
+            params = '{"media":"pictures"}';
+        }
+
+        param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
+        complete_url = window.base_url + param_url;
+
+        $ionicLoading.show();
+        $http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
+            .success(function (data, status, headers, config) {
+                $ionicLoading.hide();
+                callback(data);
+            })
+            .error(function (data, status, headers, config) {
+                $ionicLoading.hide();
+                alert("Error fetching files");
+            });
+
+    }
+
     return loader;
 });

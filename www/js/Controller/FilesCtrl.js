@@ -3,6 +3,13 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading, Loader) {
 	var path = "";
 	$scope.title = "Sources";
 
+    $scope.showFileType = function () {
+        Loader.getAllFiles(function (data) {
+            $scope.sources = data.result.sources;
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
+
 	$scope.getStart = function() {
 		method = "Files.GetSources";
 		params = '{"media":"files"}';

@@ -22,7 +22,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
         });
 
         $rootScope.$on('$stateChangeSuccess ',
-            function(event, toState, toParams, fromState, fromParams){
+            function (event, toState, toParams, fromState, fromParams) {
                 console.log("Success--------------")
                 console.log(JSON.stringify(fromState))
                 console.log(JSON.stringify(toState));
@@ -30,9 +30,17 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 console.log(JSON.stringify(toParams))
 
             });
+        $rootScope.$on('$stateNotFound',
+            function (event, toState, toParams, fromState, fromParams) {
+                console.log("not found--------------")
+                console.log(JSON.stringify(fromState))
+                console.log(JSON.stringify(toState));
+                console.log(JSON.stringify(fromParams))
+                console.log(JSON.stringify(toParams))
+            })
 
         $rootScope.$on('$stateChangeError',
-            function(event, toState, toParams, fromState, fromParams, error){
+            function (event, toState, toParams, fromState, fromParams, error) {
                 event.preventDefault()
                 console.log("Error----------------")
                 console.log(JSON.stringify(fromState))
@@ -43,7 +51,9 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
             })
     })
 
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+        $ionicConfigProvider.views.maxCache(0);
 
         $stateProvider
 
@@ -219,7 +229,16 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 views: {
                     'file-tab-music': {
                         templateUrl: 'views/Files/files-music.html',
-                        controller : "FilesCtrl"
+                        controller: "FilesCtrl"
+                    }
+                }
+            })
+            .state('app.file.file-music-list', {
+                url: '/file-music-list/:sourceFileLabel',
+                views: {
+                    'file-tab-music': {
+                        templateUrl: 'views/Files/files-music-list.html',
+                        controller: "FilesCtrl"
                     }
                 }
             })
@@ -227,8 +246,8 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 url: '/video',
                 views: {
                     'file-tab-video': {
-                        templateUrl: 'views/Files/files-video.html'
-                        controller : "FilesCtrl"
+                        templateUrl: 'views/Files/files-video.html',
+                        controller: "FilesCtrl"
                     }
                 }
             })
@@ -237,10 +256,11 @@ var app = angular.module('starter', ['ionic', 'starter.controllers'])
                 views: {
                     'file-tab-picture': {
                         templateUrl: 'views/Files/files-picture.html',
-                        controller : "FilesCtrl"
+                        controller: "FilesCtrl"
                     }
                 }
             })
+
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/remote');
     });

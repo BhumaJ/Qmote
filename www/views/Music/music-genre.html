@@ -14,8 +14,9 @@
         </div>
 
         <ion-list>
-            <a class="item item-thumbnail-left item-icon-right" collection-repeat="genre in genres | filter:search" href="#/app/music/album/{{genre.label}}/{{genre.genreid}}/2">
-                <h2>{{genre.label}}</h2>
+            <a class="item item-thumbnail-left item-icon-right" ng-repeat="genre in genres | filter:search" href="#/app/music/album/{{genre.label}}/{{genre.genreid}}/2">
+                <ionic-letter-avatar data="{{genre.label}}"  ></ionic-letter-avatar>
+                <h2 class="item-text-center">{{genre.label}}</h2>
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </a>
         </ion-list>

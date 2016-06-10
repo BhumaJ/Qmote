@@ -327,7 +327,6 @@
     text-align: center;
 }
 
-
 .bar-custom-color {
     background-color: #51A999 !important;
     color: #fff !important;
@@ -337,4 +336,25 @@
     color: #000 !important;
 }
 
+.item-text-center {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+.custom-header-color {
+    color: #ffffff !important;
+    background-color: #3F51B5 !important;
+}
 

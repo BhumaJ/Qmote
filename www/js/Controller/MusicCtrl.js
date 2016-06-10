@@ -166,7 +166,6 @@ app.controller('MusicCtrl', function ($scope, $http, $stateParams, $state, $loca
         thumbnailUri = thumbnailUri.replace("image://", "");
         var thumbnailURIencoded = encodeURIComponent(thumbnailUri);
         var thumbnailUriComplete = window.base_url + '/image/image://' + thumbnailURIencoded;
-
         return thumbnailUriComplete;
     };
 });

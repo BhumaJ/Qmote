@@ -249,16 +249,17 @@ app.factory('Loader', function ($http, $ionicLoading) {
 
     loader.getAllFiles = function (id, callback) {
         method = "Files.GetSources";
-        if(id== 0){
+        if (id == 0) {
             params = '{"media":"music"}';
-        }else if (id ==1) {
+        } else if (id == 1) {
             params = '{"media":"video"}';
-        }else {
+        } else {
             params = '{"media":"pictures"}';
         }
 
-        param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
+        param_url = '/jsonrpc?request={"jsonrpc":"2.0","id":"1","method":"' + method + '", "params":' + params + '}';
         complete_url = window.base_url + param_url;
+        console.log(complete_url);
 
         $ionicLoading.show();
         $http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})

@@ -1,117 +1,128 @@
-app.controller('FilesCtrl', function($scope, $http, $ionicLoading, Loader) {
+app.controller('FilesCtrl', function ($scope, $http, $stateParams, $ionicLoading, Loader) {
 
-	var path = "";
-	$scope.title = "Sources";
+    var path = "";
+    $scope.title = "Sources";
+    $scope.fileLabel = $stateParams.sourceFileLabel;
+//    console.log($stateParams.sourceFileLabel);
 
-    $scope.showFileType = function () {
-        Loader.getAllFiles(function (data) {
+    $scope.showFileType = function (id) {
+        Loader.getAllFiles(id, function (data) {
             $scope.sources = data.result.sources;
             $scope.$broadcast('scroll.refreshComplete');
         });
     };
 
-	$scope.getStart = function() {
-		method = "Files.GetSources";
-		params = '{"media":"files"}';
 
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + ',"id":2}';
-		complete_url = window.base_url + param_url;
+
+    $scope.getStart = function () {
+        method = "Files.GetSources";
+        params = '{"media":"files"}';
+
+        param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + ',"id":2}';
+        complete_url = window.base_url + param_url;
         console.log(complete_url);
-		$ionicLoading.show();
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-			.success(function(data, status, headers, config) {
-				$scope.files = data.result.sources;
-				$scope.title = "Files";
-				$ionicLoading.hide();
-				$scope.$broadcast('scroll.refreshComplete');
-			})
-			.error(function(data, status, headers, config) {
-				$ionicLoading.hide();
-				$scope.$broadcast('scroll.refreshComplete');
-				alert("Error fetching sources");
-			});
-	};
+        $ionicLoading.show();
+        $http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
+            .success(function (data, status, headers, config) {
+                $scope.files = data.result.sources;
+                $scope.title = "Files";
+                $ionicLoading.hide();
+                $scope.$broadcast('scroll.refreshComplete');
+            })
+            .error(function (data, status, headers, config) {
+                $ionicLoading.hide();
+                $scope.$broadcast('scroll.refreshComplete');
+                alert("Error fetching sources");
+            });
+    };
 
-	$scope.getDir = function(dir) {
-		method = "Files.GetDirectory";
-		params = '{"directory":"' + dir + '","media":"files"}}';
+    $scope.showDirs = function (file_path) {
+        console.log(file_path);
+    };
 
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"' + method + '", "params":' + params + ',"id":1}';
-		complete_url = window.base_url + param_url;
+    $scope.getDir = function (dir) {
+        console.log(dir);
 
-		$ionicLoading.show();
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-			$ionicLoading.hide();
+        dir = dir.replace(/\\/g, "/");
+        method = "Files.GetDirectory";
+        params = '{"directory":"' + dir + '","properties":["file","size","title","thumbnail"]}}';
 
-			if (!('result' in data)) {
-				// Destination too close from root / => restricted access. Go back to beginnning
-				$scope.getStart();
-			} else {
-				$scope.files = data.result.files;
-				path = dir;
-				$scope.title = path;
-			}
-		})
-		.error(function(data, status, headers, config) {
-			$ionicLoading.hide();
-		});
-	};
+        param_url = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"' + method + '", "params":' + params + ',"id":1}';
+        complete_url = window.base_url + param_url;
 
-	$scope.getFile = function(fileObj) {
-		var file = fileObj.file;
-		if (fileObj.filetype == "file") {
-			if (getFileType(file) == 1 ) { // audio file
-				play(file);
-			} else {
-				alert("The file cannot be played");
-			}
-		} else {
-			$scope.getDir(file);
-		}
-	};
+        $ionicLoading.show();
+        $http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
+            .success(function (data, status, headers, config) {
+                $ionicLoading.hide();
 
-	// Rebuild the parent directory path then fire getDirectory
-	$scope.getParent = function() {
-		var reg = new RegExp("/", "g");
-		var tmp = path.split(reg);
-		var dir = "";
-		for (var i = 1; i < tmp.length - 2; i++) {
-			dir = dir + '/' + tmp[i];
-		}
-		$scope.getDir(dir+"/");
-	};
+                if (!('result' in data)) {
+                    // Destination too close from root / => restricted access. Go back to beginnning
+                    $scope.getStart();
+                } else {
+                    $scope.files = data.result.files;
+                    path = dir;
+                    $scope.title = path;
+                }
+            })
+            .error(function (data, status, headers, config) {
+                $ionicLoading.hide();
+            });
+    };
 
-	var getFileType = function (file) {
-		// List of supported extensions
-		var media = ["3gp","aif","aiff","aac","amr","flac","m3u","m4a","mid","midi","mp2","mp3","ogg","oga","wav","wma",
-					"avi","mp4","mkv","mpeg",
-					"bmp","jpg","jpeg","gif","png","tif","tiff","ico"];
+    $scope.getFile = function (fileObj) {
+        var file = fileObj.file;
+        if (fileObj.filetype == "file") {
+            if (getFileType(file) == 1) { // audio file
+                play(file);
+            } else {
+                alert("The file cannot be played");
+            }
+        } else {
+            $scope.getDir(file);
+        }
+    };
 
-		// Extract the file extension
-		var reg = /\.[0-9a-z]{1,5}$/i;
-		var ext = (file.match(reg))[0];
-		ext = ext.substring(1);
-		
-		if (media.indexOf(ext) > 0) {
-			return 1;
-		}
-		
-		return 0;
-	};
+    // Rebuild the parent directory path then fire getDirectory
+    $scope.getParent = function () {
+        var reg = new RegExp("/", "g");
+        var tmp = path.split(reg);
+        var dir = "";
+        for (var i = 1; i < tmp.length - 2; i++) {
+            dir = dir + '/' + tmp[i];
+        }
+        $scope.getDir(dir + "/");
+    };
 
-	var play = function(file) {
-		method = "Player.Open";
-		params = '{"item":{"file":"' + file + '"}}';
+    var getFileType = function (file) {
+        // List of supported extensions
+        var media = ["3gp", "aif", "aiff", "aac", "amr", "flac", "m3u", "m4a", "mid", "midi", "mp2", "mp3", "ogg", "oga", "wav", "wma",
+            "avi", "mp4", "mkv", "mpeg",
+            "bmp", "jpg", "jpeg", "gif", "png", "tif", "tiff", "ico"];
 
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
+        // Extract the file extension
+        var reg = /\.[0-9a-z]{1,5}$/i;
+        var ext = (file.match(reg))[0];
+        ext = ext.substring(1);
 
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-		})
-		.error(function(data, status, headers, config) {
-			alert("Cannot read file");
-		});
-	};
+        if (media.indexOf(ext) > 0) {
+            return 1;
+        }
+
+        return 0;
+    };
+
+    var play = function (file) {
+        method = "Player.Open";
+        params = '{"item":{"file":"' + file + '"}}';
+
+        param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
+        complete_url = window.base_url + param_url;
+
+        $http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
+            .success(function (data, status, headers, config) {
+            })
+            .error(function (data, status, headers, config) {
+                alert("Cannot read file");
+            });
+    };
 });

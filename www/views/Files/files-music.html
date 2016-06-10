@@ -14,9 +14,11 @@
         </div>
 
         <ion-list>
-            <a class="item item-thumbnail-left item-icon-right" collection-repeat="source in sources | filter:search">
-                <!--<img ng-src="{{getThumbnailAlbum(artist.thumbnail)}}">-->
-                <h2>{{source.label}}</h2>
+
+            <a class="item item-thumbnail-left item-icon-right" ng-repeat="source in sources"
+               href="#app/file/file-music-list/{{source.label}}">
+                <ionic-letter-avatar data="{{source.label}}"  ></ionic-letter-avatar>
+                <h2 class="item-text-center">{{source.label}}</h2>
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </a>
         </ion-list>
